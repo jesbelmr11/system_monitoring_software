@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>System Monitor Controller</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+    body { 
+      font-family: 'DM Sans', sans-serif; 
+      background: #f0f2f7; 
+      color: #1a1d2e; 
+      margin: 0; padding: 0; 
+      display: flex; flex-direction: column; 
+      height: 100vh; overflow: hidden; 
+    }
+    
+    .top-bar { 
+      display: flex; align-items: center; justify-content: space-between; 
+      padding: 12px 24px; background: #fff; 
+      border-bottom: 1px solid #e2e6f0; 
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03); z-index: 10;
+    }
+    .top-bar h1 { font-size: 16px; margin: 0; flex: 1; }
+    
+    .status-container { 
+      flex: 1; display: flex; align-items: center; justify-content: center; 
+      gap: 8px; font-weight: 500; font-size: 13px; margin: 0; 
+    }
+    .status-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .status-dot.stopped { background: #dc2626; box-shadow: 0 0 8px rgba(220,38,38,0.4); }
+    .status-dot.running { background: #16a361; box-shadow: 0 0 8px rgba(22,163,97,0.4); animation: blink 1.5s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.5} }
+    
+    .btn-group { flex: 1; justify-content: flex-end; display: flex; gap: 10px; margin: 0; }
+    button { padding: 8px 18px; font-size: 13px; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+    .btn-start { background: #1a1d2e; color: #fff; }
+    .btn-start:hover { background: #2a2e45; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(26,29,46,0.2); }
+    .btn-start:disabled { background: #aab2c8; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn-stop { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+    .btn-stop:hover { background: #fee2e2; }
+    .btn-stop:disabled { opacity: 0.5; cursor: not-allowed; }
+    
+    #view-container { flex: 1; display: flex; flex-direction: column; position: relative; }
+    
+    .log-container { 
+      margin: 15px; border-radius: 10px; background: #1a1d2e; color: #aab2c8; 
+      padding: 15px; flex: 1; overflow-y: auto; 
+      font-family: monospace; font-size: 12px; line-height: 1.5; 
+    }
+    .log-line { margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .log-error { color: #fca5a5; }
+    .log-name { font-weight: bold; color: #fff; margin-right: 8px; }
+    
+    #dashboard-frame { 
+      width: 100%; height: 100%; border: none; background: #f0f2f7; display: none; 
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <h1>Monitoring App</h1>
+    <div class="status-container">
+      <div id="status-dot" class="status-dot stopped"></div>
+      <span id="status-text">Stopped</span>
+    </div>
+    <div class="btn-group">
+      <button id="btn-start" class="btn-start">🚀 START</button>
+      <button id="btn-stop" class="btn-stop" disabled>🛑 STOP</button>
+    </div>
+  </div>
+
+  <div id="view-container">
+    <div class="log-container" id="log-output">
+      <div class="log-line">System ready. Waiting to start services...</div>
+    </div>
+    <iframe id="dashboard-frame"></iframe>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

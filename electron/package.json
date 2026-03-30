@@ -1,0 +1,29 @@
+{
+  "name": "system-monitor-controller",
+  "version": "1.0.0",
+  "description": "Control dashboard for system monitoring",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "rm -rf dist && xattr -cr . && electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^30.5.1",
+    "electron-builder": "^26.8.1"
+  },
+  "build": {
+    "appId": "com.system.monitor",
+    "productName": "System Monitor V2",
+    "afterPack": "scripts/clean-mac.js",
+    "mac": {
+      "target": "dmg",
+      "identity": null
+    },
+    "win": {
+      "target": "nsis"
+    }
+  },
+  "dependencies": {
+    "chokidar": "^5.0.0"
+  }
+}

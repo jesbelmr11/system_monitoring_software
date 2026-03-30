@@ -1,0 +1,10 @@
+[Renderer Line 2] %cElectron Security Warning (Insecure Content-Security-Policy) font-weight: bold; This renderer process has either no Content Security
+  Policy set or a policy with "unsafe-eval" enabled. This exposes users of
+  this app to unnecessary security risks.
+
+For more information and help, consult
+https://electronjs.org/docs/tutorial/security.
+This warning will not show up
+once the app is packaged.
+DUMP STATE: { hasAPI: true, hasElectron: true, hasRenderer: true }
+[68148:0326/142223.161328:ERROR:network_service_instance_impl.cc(599)] Network service crashed, restarting service.
